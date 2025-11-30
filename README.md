@@ -1,93 +1,93 @@
 # OnlineStore Database Project
 
-This repository contains the implementation of my database course project developed using Microsoft SQL Server. The project demonstrates a complete relational database design for a small online retail system, including schema creation, data population, indexing, queries, stored procedures, triggers, and transactional logic.
+This repository contains the implementation of my database course project developed using Microsoft SQL Server. The project demonstrates a complete relational database design for a small **Online retail system**, including schema creation, data population, indexing, queries, stored procedures, triggers, and transactional logic.
 
 # Project Overview
 
 The database models a simplified online store environment and includes the following core entities:
 
-'Customers' – customer information
+- `Customers` – customer information
 
-'Categories' – product classification
+- `Categories` – product classification
 
-'Products' – merchandise offered by the store
+- `Products` – merchandise offered by the store
 
-'Orders' – purchase orders placed by customers
+- `Orders` – purchase orders placed by customers
 
-'OrderItems' – junction table representing the many-to-many relationship between Orders and Products
+- `OrderItems` – junction table representing the many-to-many relationship between Orders and Products
 
-'Payments' – payment records linked to each order
+- `Payments` – payment records linked to each order
 
-'Logs' – auxiliary table used to demonstrate TRUNCATE operations
+- `Logs` – auxiliary table used to demonstrate TRUNCATE operations
 
 The system supports realistic operations such as order processing, payment handling, and stock updates.
 
-Implemented Course Requirements
-Database Design
+# Implemented Course Requirements
+**Database Design**
 
-Use of primary keys with IDENTITY auto-increment
+- Use of primary keys with IDENTITY auto-increment
 
-Use of foreign keys to enforce referential integrity
+-Use of foreign keys to enforce referential integrity
 
-Implementation of a many-to-many relationship through the OrderItems table
+- Implementation of a many-to-many relationship through the OrderItems table
 
-Use of various SQL data types (INT, VARCHAR, DECIMAL, DATETIME)
+- Use of various SQL data types (INT, VARCHAR, DECIMAL, DATETIME)
 
-Indexes
+**Indexes**
 
-Unique index on customer emails
+- Unique index on customer emails
 
-Non-unique indexes for product name and order date to improve query performance
+- Non-unique indexes for product name and order date to improve query performance
 
-Data Manipulation
+**Data Manipulation**
 
-Multi-row INSERT statements for all tables
+- Multi-row INSERT statements for all tables
 
-UPDATE operations adjusting product price and stock
+- UPDATE operations adjusting product price and stock
 
-DELETE operations filtering by conditions
+- DELETE operations filtering by conditions
 
-TRUNCATE operation demonstrated using the Logs table
+- TRUNCATE operation demonstrated using the Logs table
 
-Querying and Data Retrieval
+**Querying and Data Retrieval**
 
-Aggregate queries using COUNT, SUM, AVG
+- Aggregate queries using COUNT, SUM, AVG
 
-Grouped reporting with GROUP BY
+- Grouped reporting with GROUP BY
 
-Ordered output using ORDER BY
+- Ordered output using ORDER BY
 
-Pagination implemented using OFFSET … FETCH
+- Pagination implemented using OFFSET … FETCH
 
-Customer spending summary using joins and aggregation
+- Customer spending summary using joins and aggregation
 
-Joins and Views
+**Joins and Views**
 
-INNER JOIN and LEFT JOIN examples
+- INNER JOIN and LEFT JOIN examples
 
-Multi-table join combining Customers → Orders → OrderItems → Products
+- Multi-table join combining Customers → Orders → OrderItems → Products
 
-A consolidated reporting view: OrderDetails
+- A consolidated reporting view: OrderDetails
 
-Programmability
+**Programmability**
 
-Scalar function: GetOrderTotal
+- Scalar function: GetOrderTotal
 
-Trigger: UpdateOrderTotal (automatically recalculates order totals)
+- Trigger: UpdateOrderTotal (automatically recalculates order totals)
 
-Stored procedure: GetOrdersPaged (paged order retrieval)
+- Stored procedure: GetOrdersPaged (paged order retrieval)
 
-Transaction example using BEGIN TRY / CATCH, demonstrating safe COMMIT/ROLLBACK handling
+- Transaction example using BEGIN TRY / CATCH, demonstrating safe COMMIT/ROLLBACK handling
 
-How to Run the Project
+# How to Run the Project
 
-Open SQL Server Management Studio (SSMS).
+- Open SQL Server Management Studio (SSMS).
 
-Load the file OnlineStore.sql into a new query window.
+- Load the file OnlineStore.sql into a new query window.
 
-Execute the entire script (F5).
+- Execute the entire script (F5).
 
-The script will:
+- The script will:
 
 Create the OnlineStore database
 
@@ -99,10 +99,10 @@ Create the function, trigger, stored procedure, and view
 
 Run demonstration updates, deletions, and SELECT queries
 
-Repository Contents
+# Repository Contents
 
-OnlineStore.sql – full SQL script with all database objects and sample operations
+- OnlineStore.sql – full SQL script with all database objects and sample operations
 
-Presentation.pptx – project presentation for course submission
+- Presentation.pptx – project presentation for course submission
 
-diagram.png – entity–relationship diagram of the database schema
+- diagram.png – entity–relationship diagram of the database schema
