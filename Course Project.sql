@@ -30,7 +30,7 @@ DROP FUNCTION IF EXISTS GetOrderTotal;
 
 -- Customers
 CREATE TABLE Customers (
-    CustomerID INT IDENTITY PRIMARY KEY,
+    CustomerID INT IDENTITY(1,1) PRIMARY KEY,
     Name       VARCHAR(100) NOT NULL,
     Email      VARCHAR(120) NOT NULL UNIQUE,
     City       VARCHAR(60),
@@ -39,13 +39,13 @@ CREATE TABLE Customers (
 
 -- Categories
 CREATE TABLE Categories (
-    CategoryID INT IDENTITY PRIMARY KEY,
+    CategoryID   INT IDENTITY(1,1) PRIMARY KEY,
     CategoryName VARCHAR(100) NOT NULL
 );
 
 -- Products
 CREATE TABLE Products (
-    ProductID   INT IDENTITY PRIMARY KEY,
+    ProductID   INT IDENTITY(1,1) PRIMARY KEY,
     ProductName VARCHAR(120) NOT NULL,
     SKU         VARCHAR(40) NOT NULL UNIQUE,
     CategoryID  INT NOT NULL,
@@ -56,20 +56,20 @@ CREATE TABLE Products (
 
 -- Orders
 CREATE TABLE Orders (
-    OrderID   INT IDENTITY PRIMARY KEY,
-    CustomerID INT NOT NULL,
-    OrderDate DATETIME DEFAULT GETDATE(),
-    Total DECIMAL(10,2) DEFAULT 0,
+    OrderID     INT IDENTITY(1,1) PRIMARY KEY,
+    CustomerID  INT NOT NULL,
+    OrderDate   DATETIME DEFAULT GETDATE(),
+    Total       DECIMAL(10,2) DEFAULT 0,
     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
 
 -- Many-to-Many: OrderItems (Orders ↔ Products)
 CREATE TABLE OrderItems (
-    OrderItemID INT IDENTITY PRIMARY KEY,
-    OrderID INT NOT NULL,
-    ProductID INT NOT NULL,
-    Qty INT NOT NULL,
-    Price DECIMAL(10,2) NOT NULL,
+    OrderItemID INT IDENTITY(1,1) PRIMARY KEY,
+    OrderID     INT NOT NULL,
+    ProductID   INT NOT NULL,
+    Qty         INT NOT NULL,
+    Price       DECIMAL(10,2) NOT NULL,
     UNIQUE (OrderID, ProductID),
     FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
@@ -77,21 +77,22 @@ CREATE TABLE OrderItems (
 
 -- Payments
 CREATE TABLE Payments (
-    PaymentID INT IDENTITY PRIMARY KEY,
-    OrderID INT NOT NULL,
-    Amount DECIMAL(10,2) NOT NULL,
-    PaidAt DATETIME DEFAULT GETDATE(),
-    Method VARCHAR(20),
+    PaymentID   INT IDENTITY(1,1) PRIMARY KEY,
+    OrderID     INT NOT NULL,
+    Amount      DECIMAL(10,2) NOT NULL,
+    PaidAt      DATETIME DEFAULT GETDATE(),
+    Method      VARCHAR(20),
     FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
 );
 
 -- Table used for TRUNCATE
 CREATE TABLE Logs (
-    LogID INT IDENTITY PRIMARY KEY,
-    Message VARCHAR(200),
-    CreatedAt DATETIME DEFAULT GETDATE()
+    LogID       INT IDENTITY(1,1) PRIMARY KEY,
+    Message     VARCHAR(200),
+    CreatedAt   DATETIME DEFAULT GETDATE(),
+    CustomerID INT FOREIGN KEY REFERENCES Customers(CustomerID)
 );
-    
+
 ------------------------------------------------------------
 -- INDEXES
 ------------------------------------------------------------
@@ -100,7 +101,7 @@ CREATE UNIQUE INDEX INDEX_Customer_Email ON Customers(Email);
 CREATE INDEX INDEX_Products_Name ON Products(ProductName);
 CREATE INDEX INDEX_Orders_Date ON Orders(OrderDate);
 
-
+SELECT * FROM Logs;
 ------------------------------------------------------------
 -- 2. DATA MANIPULATION
 ------------------------------------------------------------
@@ -156,10 +157,11 @@ VALUES (1, 1250, 'CARD'),
        (3, 25, 'CASH');
 
 
-INSERT INTO Logs (Message) 
-VALUES ('Order processed'),
-       ('Payment received'),
-       ('System check');
+INSERT INTO Logs (CustomerID, Message)
+VALUES 
+(1, 'Order processed'),
+(2, 'Payment received'),
+(1, 'System check');
 
 SET NOCOUNT OFF;
 
@@ -176,20 +178,33 @@ SELECT * FROM Logs;
 ------------------------------------------------------------
 -- UPDATING
 ------------------------------------------------------------
+SELECT * FROM Products;
 
 UPDATE Products SET Price = Price * 0.9 WHERE CategoryID = 3;
+
 SELECT * FROM Products;
 
 UPDATE Products SET Stock = Stock + 50 WHERE SKU = 'SKU-A1';
-SELECT * FROM Products;
 
+SELECT * FROM Products;
 ------------------------------------------------------------
 -- DELETING AND TRUNCATING
 ------------------------------------------------------------
 
+SELECT * FROM Payments;
+SET NOCOUNT ON;
+
 DELETE FROM Payments WHERE Method = 'CASH';
 
+SET NOCOUNT OFF;
+SELECT * FROM Payments;
+
+
+SELECT * FROM Logs;
+
 TRUNCATE TABLE Logs;
+
+SELECT * FROM Logs;
 
 /*
 SELECT * FROM Customers;
