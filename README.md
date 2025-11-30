@@ -101,7 +101,7 @@ The system supports realistic operations such as order processing, payment handl
 
 # Repository Contents
 
-- OnlineStore.sql – full SQL script with all database objects and sample operations
+- Course Project.sql – full SQL script with all database objects and sample operations
 
 - Presentation.pptx – project presentation for course submission
 
