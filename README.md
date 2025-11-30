@@ -27,7 +27,7 @@ The system supports realistic operations such as order processing, payment handl
 
 - Use of primary keys with IDENTITY auto-increment
 
--Use of foreign keys to enforce referential integrity
+- Use of foreign keys to enforce referential integrity
 
 - Implementation of a many-to-many relationship through the OrderItems table
 
@@ -89,15 +89,15 @@ The system supports realistic operations such as order processing, payment handl
 
 - The script will:
 
-Create the OnlineStore database
+1. Create the OnlineStore database
 
-Generate all tables, indexes, and constraints
+2. Generate all tables, indexes, and constraints
 
-Populate sample data
+3. Populate sample data
 
-Create the function, trigger, stored procedure, and view
+4. Create the function, trigger, stored procedure, and view
 
-Run demonstration updates, deletions, and SELECT queries
+5. Run demonstration updates, deletions, and SELECT queries
 
 # Repository Contents
 
