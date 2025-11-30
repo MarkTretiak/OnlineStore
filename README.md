@@ -1,24 +1,24 @@
-OnlineStore Database Project
+# OnlineStore Database Project
 
 This repository contains the implementation of my database course project developed using Microsoft SQL Server. The project demonstrates a complete relational database design for a small online retail system, including schema creation, data population, indexing, queries, stored procedures, triggers, and transactional logic.
 
-Project Overview
+# Project Overview
 
 The database models a simplified online store environment and includes the following core entities:
 
-Customers – customer information
+'Customers' – customer information
 
-Categories – product classification
+'Categories' – product classification
 
-Products – merchandise offered by the store
+'Products' – merchandise offered by the store
 
-Orders – purchase orders placed by customers
+'Orders' – purchase orders placed by customers
 
-OrderItems – junction table representing the many-to-many relationship between Orders and Products
+'OrderItems' – junction table representing the many-to-many relationship between Orders and Products
 
-Payments – payment records linked to each order
+'Payments' – payment records linked to each order
 
-Logs – auxiliary table used to demonstrate TRUNCATE operations
+'Logs' – auxiliary table used to demonstrate TRUNCATE operations
 
 The system supports realistic operations such as order processing, payment handling, and stock updates.
 
