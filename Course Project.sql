@@ -1,4 +1,9 @@
-﻿--FOR DELETING ALL TABLES AND etc. FOR RUNNING ALL AGAIN
+﻿/*
+GitHub Link
+https://github.com/MarkTretiak/OnlineStore.git
+*/
+
+--FOR DELETING ALL TABLES AND etc. FOR RUNNING ALL AGAIN
 IF DB_ID('OnlineStore') IS NULL
 BEGIN
     PRINT 'Database not found.';
@@ -272,6 +277,8 @@ JOIN OrderItems oi ON oi.OrderID = o.OrderID
 JOIN Products p ON oi.ProductID = p.ProductID;
 GO
 
+SELECT * FROM OrderDetails;
+
 ------------------------------------------------------------
 -- 5. PROCEDURE / FUNCTION / TRIGGER / TRANSACTION
 ------------------------------------------------------------
@@ -297,41 +304,6 @@ BEGIN
     FROM Orders
     WHERE Orders.OrderID IN (SELECT OrderID FROM inserted UNION SELECT OrderID FROM deleted);
 END;
-GO
-
--- Stored procedure (pagination example)
-GO
-CREATE OR ALTER PROCEDURE GetOrdersPaged
-    @CustomerID INT,
-    @Page INT = 1,
-    @Size INT = 5
-AS
-BEGIN
-    SELECT OrderID, OrderDate, Total
-    FROM Orders
-    WHERE CustomerID = @CustomerID
-    ORDER BY OrderDate DESC
-    OFFSET (@Page - 1) * @Size ROWS FETCH NEXT @Size ROWS ONLY;
-END;
-GO
-
--- Manual Transaction
-BEGIN TRANSACTION;
-BEGIN TRY
-    
-    DECLARE @id INT;
-
-    INSERT INTO Orders (CustomerID) VALUES (1);
-    SET @id = SCOPE_IDENTITY();
-
-    INSERT INTO OrderItems (OrderID, ProductID, Qty, Price)
-    VALUES (@id, 2, 3, 25);
-
-    COMMIT TRANSACTION;
-END TRY
-BEGIN CATCH
-    ROLLBACK TRANSACTION;
-END CATCH;
 GO
 
 /*
