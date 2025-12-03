@@ -73,8 +73,12 @@ The system supports realistic operations such as order processing, payment handl
 
 - Scalar function: GetOrderTotal
 
+- Stored procedure: GetOrdersPaged (paged order retrieval)
+
+- Transaction example using BEGIN TRY / CATCH, demonstrating safe COMMIT/ROLLBACK handling
+
 - Trigger: UpdateOrderTotal (automatically recalculates order totals)
-- 
+
 # How to Run the Project
 
 - Open SQL Server Management Studio (SSMS).
